@@ -183,6 +183,10 @@ main{
       border-radius: 25px;
       font-size: large;
       cursor: pointer;
+      &:hover{
+        background-color: #20201a;
+
+      }
     }
   }
 }

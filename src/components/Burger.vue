@@ -23,10 +23,10 @@ const hamburgerOpen = ref(false)
     </div>  
     </div>
 
-    <div v-if="hamburgerOpen" class="burger-menu">
+    <div v-if="hamburgerOpen" class="burger-menu" >
 
-        <div class="burger-open-menu">
-          <div class="burger-background">
+        <div class="burger-open-menu" @click="console.log('test')">
+          <div class="burger-background" >
 
             <RouterLink to="/">Avis de passage</RouterLink>
             <RouterLink to="/liste">Liste des interventions</RouterLink>
@@ -72,6 +72,8 @@ const hamburgerOpen = ref(false)
         color: white;
         text-decoration: none;
         margin-left:20px;
+        width: 100%;
+        text-align: center;
     }
     .log-class{
         width: 85px;

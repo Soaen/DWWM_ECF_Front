@@ -9,7 +9,6 @@ const tempstore = useTempInterStore()
 const isCorrect = ref(false)
 const notChecked = ref(false)
 
-
 const submitForm = () =>{
   event.preventDefault();
   if(isCorrect.value){
@@ -21,15 +20,11 @@ const submitForm = () =>{
     observations: tempstore.getTempInters.observations,
   })
   router.push('/liste')
-  console.log(store.getInters);
   }else{
     notChecked.value = true
   }
 
 }
-
-console.log(tempstore.getTempInters);
-
 </script>
 
 
@@ -82,6 +77,7 @@ console.log(tempstore.getTempInters);
   margin: 80px;
   border-radius: 50px;
   padding: 30px;
+    align-items: center;
   color: white;
     .checkbox-container{
     display: flex;
@@ -103,11 +99,12 @@ console.log(tempstore.getTempInters);
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
     .submit-btn{
       cursor: pointer;
       background-color: #2C2C24;
       color: white;
-      width: 40%;
+      width: 60%;
       margin-top: 30px;
       margin-left: 30px;
       height: 80px;
@@ -116,6 +113,10 @@ console.log(tempstore.getTempInters);
       color: white;
       border-radius: 25px;
       font-size: large;
+      &:hover{
+        background-color: #20201a;
+
+      }
     }
   }
 }
@@ -131,8 +132,7 @@ console.log(tempstore.getTempInters);
     margin: 20px;
     padding: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    
     form{
       margin-left: 0;
       .submit-btn{
@@ -145,7 +145,7 @@ console.log(tempstore.getTempInters);
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        width: 100%;
+        
         .submit-btn{
         width: 60%;
         margin: 10px;
