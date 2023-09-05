@@ -1,7 +1,7 @@
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 import router from '../router';
-import {useTempInterStore} from '../stores/tempinter'
+import { useTempInterStore } from '../stores/tempinter'
 import { useInterStore } from '../stores/intervention';
 
 const store = useInterStore()

@@ -25,7 +25,7 @@ const hamburgerOpen = ref(false)
 
     <div v-if="hamburgerOpen" class="burger-menu" >
 
-        <div class="burger-open-menu" @click="console.log('test')">
+        <div class="burger-open-menu" @click="hamburgerOpen = false">
           <div class="burger-background" >
 
             <RouterLink to="/">Avis de passage</RouterLink>

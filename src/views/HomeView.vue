@@ -3,6 +3,7 @@ import { useInterStore } from '../stores/intervention';
 import {useTempInterStore} from '../stores/tempinter'
 import { ref } from 'vue'
 import router from '../router';
+import imgVitre from '@/assets/imgs/pp-vitre.jpg';
 
 
 
@@ -83,8 +84,8 @@ const submitForm = () => {
   <main>
 
     <div class="form-container">
-
-      <h1>Avis de passage</h1>
+        <div class="form">
+        <h1>Avis de passage</h1>
 
       <form action="" method="post">
 
@@ -98,7 +99,7 @@ const submitForm = () => {
 
         <label for="date">Date de passage <span class="required">*</span></label>
 
-        <input type="date" v-model='myDate' required>
+        <input type="date" v-model='myDate' required :max="myDate">
 
         <label for="date" class="date">Observations</label>
 
@@ -107,6 +108,9 @@ const submitForm = () => {
         <button type="submit" class="submit-btn" @click="submitForm">Valider</button>
 
       </form>
+      </div>
+      
+      
 
     </div> 
 
@@ -125,15 +129,18 @@ main{
 .error{
       color: red;
     }
+    .form{
+      width: 100%;
+    }
 .form-container{
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   background-color: #3D3D33;
-  width: 50%;
+  width: 60%;
+  height: 90%;
   margin: 80px;
   border-radius: 50px;
-  padding: 30px;
   color: white;
   
   h1{
@@ -182,6 +189,7 @@ main{
       color: white;
       border-radius: 25px;
       font-size: large;
+      margin-bottom: 30px;
       cursor: pointer;
       &:hover{
         background-color: #20201a;
