@@ -1,28 +1,37 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import logoimg from '../assets/imgs/logo-solo.png'
+
 
 const hamburgerOpen = ref(false)
-const isConnected = ref(false)
-
-
-
-
 </script>
 
 <template>
+  <div class="burger-flex">
 
-    <div class="hamburger" @click="hamburgerOpen = !hamburgerOpen" :class="hamburgerOpen ? 'hamburger--is-open' : ''" >
+    <RouterLink to="/">
+      <img :src="logoimg" alt="Logo Clean3000" class="test">
+      
+      </RouterLink>
+
+        <div class="hamburger" @click="hamburgerOpen = !hamburgerOpen" :class="hamburgerOpen ? 'hamburger--is-open' : ''" >
+      
         <div class="hamburger__item hamburger__item--first"></div>
         <div class="hamburger__item hamburger__item--middle"></div>
         <div class="hamburger__item hamburger__item--last"></div>
     </div>  
+    </div>
 
     <div v-if="hamburgerOpen" class="burger-menu">
 
         <div class="burger-open-menu">
+          <div class="burger-background">
+
             <RouterLink to="/">Avis de passage</RouterLink>
             <RouterLink to="/liste">Liste des interventions</RouterLink>
+          </div>
+
 
                     
             </div>
@@ -34,13 +43,22 @@ const isConnected = ref(false)
 
 
 <style lang="scss" scoped>
+.test{
+  width: 35px;
+}
+.burger-flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
 
 .burger-menu{
     font-family: Roboto;
     position: absolute;
     width: 100%;
     margin-top:40px;
-    background-color: #3D3D33;
+    background-color: rgba($color: #000000, $alpha: 0.5);
     left: 0;
 
 }
@@ -48,6 +66,7 @@ const isConnected = ref(false)
 .burger-open-menu{
     display: flex;
     flex-direction: column;
+    height: 100vh;
     a{
         margin: 10px;
         color: white;
@@ -56,6 +75,13 @@ const isConnected = ref(false)
     }
     .log-class{
         width: 85px;
+    }
+    .burger-background{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #3D3D33;
+      height: 100px;
     }
 }
 

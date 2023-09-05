@@ -7,7 +7,7 @@ const isResponsive = ref(false)
 
 
 function updateFullSideBar() {
-  if(window.matchMedia("(min-width: 500)").matches){
+  if(window.matchMedia("(min-width: 500px)").matches){
     isResponsive.value = false
   } else{
     isResponsive.value = true
@@ -25,11 +25,13 @@ window.addEventListener("resize", updateFullSideBar);
 
         <div class="wrapper" v-if="!isResponsive">
 
-            <img :src="logoimg" alt="Logo Clean3000">
+            <RouterLink to="/">
 
+                <img :src="logoimg" alt="Logo Clean3000">
+            </RouterLink>
             <nav class="navbar">
-                <RouterLink to="/">Avis de passage</RouterLink>
-                <RouterLink to="/liste">Liste des interventions</RouterLink>
+                <RouterLink to="/" class="btn-nav">Avis de passage</RouterLink>
+                <RouterLink to="/liste" class="btn-nav">Liste des interventions</RouterLink>
             </nav>
 
         </div>
@@ -47,7 +49,7 @@ window.addEventListener("resize", updateFullSideBar);
 <style scoped lang="scss">
 .burger-menu{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     background-color: #3D3D33;
     padding: 10px;
 }
@@ -63,7 +65,7 @@ window.addEventListener("resize", updateFullSideBar);
         margin-left: 20px;
     }
 }
-a{
+.btn-nav{
     font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: none;
     color: white;

@@ -12,7 +12,12 @@ const router = createRouter({
       path: '/liste',
       name: 'listview',
       component: () => import('../views/ListView.vue')
-    }
+    },
+    {
+      path: '/confirm',
+      name: 'confirm',
+      component: () => import('../views/FormConfirmView.vue')
+    },
   ]
 })
 

@@ -26,7 +26,7 @@ export const useInterStore = defineStore('inter', {
         getInters() {
           return this.inters
         },
-        getTotal(){
+        getIntersTotal(){
             return this.inters.length
         }
       },

@@ -1,6 +1,10 @@
 <script setup>
-import {useInterStore} from '../stores/intervention'
+import { useInterStore } from '../stores/intervention';
+import {useTempInterStore} from '../stores/tempinter'
 import { ref } from 'vue'
+import router from '../router';
+
+
 
 const listClients = ref([
   {
@@ -33,50 +37,52 @@ const listClients = ref([
 const myDate = ref(new Date().toISOString().slice(0,10))
 const clientid = ref()
 const obsText = ref('')
-const store = useInterStore()
-const isNotSubmit = ref(true)
-const clientName = ref()
-const isCorrect = ref(false)
+const store = useTempInterStore()
+const defStore = useInterStore()
 const isError = ref(false)
-const notChecked = ref(false)
 
-const submitForm = () =>{
-  event.preventDefault();
-  if(isCorrect.value){
-    store.addInter({
-    id: store.getTotal,
-    clientId: clientid.value,
-    date: myDate.value,
-    observations: obsText.value
-  })
-  console.log(store.getInters);
-  }else{
-    notChecked.value = true
-  }
 
-}
 
-const getClient = () => {
+
+// const getClient = () => {
+//   event.preventDefault();
+//   if(clientid.value != undefined){
+//     listClients.value.forEach(element => {
+//       if(element.id == clientid.value){
+//         clientName.value = element.name
+//       }
+//     });
+//   }else{
+//     isError.value = true
+//   }
+  
+// }
+
+const submitForm = () => {
   event.preventDefault();
   if(clientid.value != undefined){
     listClients.value.forEach(element => {
       if(element.id == clientid.value){
-        clientName.value = element.name
+        store.setTempInters({
+          id: defStore.getTotal,
+          clientId: clientid.value,
+          client: element.name,
+          date: myDate.value,
+          observations: obsText.value,
+        })
+        router.push('/confirm')
       }
     });
-    isNotSubmit.value = !isNotSubmit
   }else{
     isError.value = true
   }
-  
 }
-
 </script>
 
 <template>
   <main>
 
-    <div class="form-container" v-if="isNotSubmit">
+    <div class="form-container">
 
       <h1>Avis de passage</h1>
 
@@ -98,42 +104,13 @@ const getClient = () => {
 
         <textarea name="date" id="date" cols="30" rows="10" v-model="obsText"></textarea>
 
-        <button type="submit" class="submit-btn" @click="getClient">Valider</button>
+        <button type="submit" class="submit-btn" @click="submitForm">Valider</button>
 
       </form>
 
     </div> 
 
-  <div v-else class="form-container">
 
-        <h1>Récapitulatif</h1>
-
-        <p>Nom de l'entreprise/client</p>
-
-        <p class="recap-answer">{{ clientName }}</p>
-
-        <p>Date de passage</p>
-
-        <p class="recap-answer">{{ myDate }}</p>
-
-        <p>Observations</p>
-
-        <p class="recap-answer">{{ obsText != '' ? obsText : 'Aucune observation' }}</p>
-
-        <div class="checkbox-container">
-          <input type="checkbox" id="iscorrect" v-model="isCorrect" required>
-          <label for="iscorrect">Je confirme que les informations sont correctes</label>
-        </div>
-        <p class="error" v-if="notChecked">Vous devez confirmer votre choix !</p>
-
-        <div class="double-sub">
-          <button type="submit" class="submit-btn" @click="getClient">Annuler</button>
-          <RouterLink to="/liste"><button type="submit" class="submit-btn" @click="submitForm">Valider</button></RouterLink>
-        </div>
-
-
-
-      </div>
   </main>
 </template>
 
@@ -158,39 +135,7 @@ main{
   border-radius: 50px;
   padding: 30px;
   color: white;
-  .double-sub{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    .submit-btn{
-      cursor: pointer;
-      background-color: #2C2C24;
-      color: white;
-      width: 40%;
-      margin-top: 30px;
-      margin-left: 30px;
-      height: 80px;
-      background-color: #2C2C24;
-      border: 2px black solid;
-      color: white;
-      border-radius: 25px;
-      font-size: large;
-    }
-  }
-  .checkbox-container{
-    display: flex;
-    flex-direction: row;
-  }
-  .recap-answer{
-    background-color: #2C2C24;
-    width: 60%;
-    padding: 10px;
-    border: 2px black solid;
-    border-radius: 25px;
-    padding: 10px;
-    color: rgb(230, 122, 122);
-    font-weight: bold;
-  }
+  
   h1{
     color: white;
     margin-bottom: 10px;
